@@ -23,7 +23,9 @@ var ProductListComponent = (function () {
         this.showImage = !this.showImage;
     };
     ProductListComponent.prototype.ngOnInit = function () {
-        this.products = this._productService.getProducts();
+        var _this = this;
+        this._productService.getProducts()
+            .subscribe(function (productsResponse) { return _this.products = productsResponse; }, function (err) { return _this.errorMessage = err; });
     };
     ProductListComponent.prototype.onRatingClicked = function (message) {
         this.pageTitle = 'Products List: ' + message;
